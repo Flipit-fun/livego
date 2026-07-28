@@ -68,6 +68,14 @@ export async function getHoldings(address: string): Promise<Coin[]> {
 const creatorCache = new Map<string, string | null>();
 const inflight = new Map<string, Promise<string | null>>();
 
+/**
+ * Resolve a token's dev. `creator_address_hash` is the deployer, but for
+ * launchpad tokens that's the factory contract (e.g. a LaunchFactory) — not a
+ * person. The reliable human signal is the EOA that sent the creation
+ * transaction (the account that called the factory / did the deploy), which is
+ * correct for both direct deploys and launchpad deploys. Fall back to
+ * `creator_address_hash` only if the tx lookup fails.
+ */
 async function fetchCreator(contract: string): Promise<string | null> {
   try {
     const res = await fetch(`${explorerBase()}/addresses/${contract}`, {
@@ -75,8 +83,32 @@ async function fetchCreator(contract: string): Promise<string | null> {
       cache: "no-store",
     });
     if (!res.ok) return null;
-    const data = (await res.json()) as { creator_address_hash?: string | null };
-    return data.creator_address_hash ? data.creator_address_hash.toLowerCase() : null;
+    const data = (await res.json()) as {
+      creator_address_hash?: string | null;
+      creation_transaction_hash?: string | null;
+      creation_tx_hash?: string | null;
+    };
+
+    const txHash = data.creation_transaction_hash || data.creation_tx_hash;
+    if (txHash) {
+      const from = await creationTxFrom(txHash);
+      if (from) return from;
+    }
+    return data.creator_address_hash?.toLowerCase() ?? null;
+  } catch {
+    return null;
+  }
+}
+
+async function creationTxFrom(txHash: string): Promise<string | null> {
+  try {
+    const res = await fetch(`${explorerBase()}/transactions/${txHash}`, {
+      headers: { accept: "application/json" },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const tx = (await res.json()) as { from?: { hash?: string } | null };
+    return tx.from?.hash ? tx.from.hash.toLowerCase() : null;
   } catch {
     return null;
   }
