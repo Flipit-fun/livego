@@ -14,9 +14,9 @@ export default function Hero() {
           already a <span className="lit">channel</span>.
         </h1>
         <p className="lede">
-          Connect your wallet and every coin you hold turns into a room you can
-          broadcast from. Screen share the chart, pull holders onto the stage,
-          and let the token&apos;s own chat run the show.
+          Connect your wallet and every coin you created turns into a room you
+          can broadcast from. Screen share the chart, talk to every holder, and
+          let the token&apos;s own chat run the show.
         </p>
         <div className="hero-cta">
           <ConnectButton className="btn" />
@@ -27,15 +27,15 @@ export default function Hero() {
         <div className="hero-note">
           <span>
             <i className="dot" />
-            No token deploy needed
+            Devs go live from their coin
           </span>
           <span>
             <i className="dot" />
-            Hold to speak, hold to chat
+            Holders watch and chat
           </span>
           <span>
             <i className="dot" />
-            Stage of eight
+            One broadcast, every holder
           </span>
         </div>
       </div>

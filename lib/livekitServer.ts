@@ -20,6 +20,17 @@ function client(): RoomServiceClient | null {
   return new RoomServiceClient(host, key, secret);
 }
 
+/** Delete a room server-side, disconnecting everyone in it. Best-effort. */
+export async function deleteRoom(name: string): Promise<void> {
+  const svc = client();
+  if (!svc) return;
+  try {
+    await svc.deleteRoom(name);
+  } catch {
+    // room may already be gone / empty — ignore
+  }
+}
+
 /**
  * A room is "live" when its host is actively publishing. Since only the coin's
  * dev is granted publish rights, any publishing participant means the dev is on

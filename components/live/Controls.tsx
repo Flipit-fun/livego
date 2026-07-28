@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useLocalParticipant, useRoomContext } from "@livekit/components-react";
+import { useWallet } from "@/components/WalletContext";
 
 export default function Controls({ ticker }: { ticker: string }) {
   const room = useRoomContext();
+  const { auth } = useWallet();
   const {
     localParticipant,
     isMicrophoneEnabled,
@@ -32,6 +34,28 @@ export default function Controls({ ticker }: { ticker: string }) {
     guard(() => localParticipant.setCameraEnabled(!isCameraEnabled));
   const toggleScreen = () =>
     guard(() => localParticipant.setScreenShareEnabled(!isScreenShareEnabled));
+
+  const leave = async () => {
+    // If the host leaves, close the room for everyone.
+    if (canPublish && auth) {
+      try {
+        await fetch("/api/livekit/close", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            room: room.name,
+            address: auth.address,
+            message: auth.message,
+            signature: auth.signature,
+          }),
+          keepalive: true,
+        });
+      } catch {
+        // best-effort; disconnecting still ends our publish so viewers bounce
+      }
+    }
+    room.disconnect();
+  };
 
   return (
     <div className="lgr-controls glass">
@@ -61,12 +85,13 @@ export default function Controls({ ticker }: { ticker: string }) {
         </>
       ) : (
         <span className="lgr-viewer-note">
-          Watching ${ticker}. Ask the host for a seat to speak.
+          <i className="lgr-listen-dot" />
+          Listening to ${ticker} — only the dev can broadcast.
         </span>
       )}
 
-      <button className="btn btn-sm lgr-leave" onClick={() => room.disconnect()}>
-        Leave room
+      <button className="btn btn-sm lgr-leave" onClick={leave}>
+        {canPublish ? "End stream" : "Leave"}
       </button>
     </div>
   );

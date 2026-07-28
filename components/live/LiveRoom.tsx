@@ -7,6 +7,7 @@ import RoomHeader from "./RoomHeader";
 import Stage from "./Stage";
 import Controls from "./Controls";
 import LiveChat from "./LiveChat";
+import HostGate from "./HostGate";
 
 interface LiveRoomProps {
   token: string;
@@ -39,6 +40,7 @@ export default function LiveRoom({ token, serverUrl, ticker, host }: LiveRoomPro
         <LiveChat />
       </div>
 
+      <HostGate isHost={host} />
       <RoomAudioRenderer />
     </LiveKitRoom>
   );

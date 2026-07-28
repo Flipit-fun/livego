@@ -73,20 +73,18 @@ export default function Studio() {
 
         <div className="glass ctl rv">
           <div className="art">
-            <div className="seats">
-              <span className="seat full mono">1</span>
-              <span className="seat full mono">2</span>
-              <span className="seat full mono">3</span>
-              <span className="seat mono">+</span>
-              <span className="seat mono">+</span>
+            <div className="listeners">
+              {Array.from({ length: 14 }).map((_, i) => (
+                <span className="listener" key={i} />
+              ))}
             </div>
           </div>
-          <h3>Invite to the stage</h3>
+          <h3>The room just listens</h3>
           <p>
-            Pull anyone in chat up beside you. Eight seats, revocable in one
-            press, with the holder&apos;s balance shown next to their handle.
+            Holders join to watch and hear the dev — no seat requests, no
+            cross-talk. The stream is the dev&apos;s; the chat is everyone&apos;s.
           </p>
-          <div className="ctl-foot">Stage of eight</div>
+          <div className="ctl-foot">Listen-only · Open chat</div>
         </div>
       </div>
     </section>

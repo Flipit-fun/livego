@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AccessToken } from "livekit-server-sdk";
-import { recoverMessageAddress, isAddress } from "viem";
-import { verifyChallenge } from "@/lib/authChallenge";
+import { isAddress } from "viem";
+import { verifyOwnership } from "@/lib/auth";
 import { devFor, devOverride } from "@/lib/data";
 import { getCreator } from "@/lib/robinhood";
 
@@ -18,38 +18,6 @@ interface TokenRequest {
   signature?: `0x${string}`;
   /** Set when connecting without an injected wallet (demo mode). */
   demo?: boolean;
-}
-
-/** Verify that `address` really signed our challenge. */
-async function verifyOwnership(
-  address: string,
-  message?: string,
-  signature?: `0x${string}`
-): Promise<{ ok: boolean; reason?: string }> {
-  if (!message || !signature) {
-    return { ok: false, reason: "Missing signature." };
-  }
-
-  // 1. The challenge must be one we issued and still valid.
-  const challenge = verifyChallenge(message);
-  if (!challenge.ok || !challenge.address) {
-    return { ok: false, reason: challenge.reason ?? "Invalid challenge." };
-  }
-  if (challenge.address.toLowerCase() !== address.toLowerCase()) {
-    return { ok: false, reason: "Challenge address mismatch." };
-  }
-
-  // 2. The signature must recover to the claimed address.
-  try {
-    const recovered = await recoverMessageAddress({ message, signature });
-    if (recovered.toLowerCase() !== address.toLowerCase()) {
-      return { ok: false, reason: "Signature does not match address." };
-    }
-  } catch {
-    return { ok: false, reason: "Could not verify signature." };
-  }
-
-  return { ok: true };
 }
 
 export async function POST(req: NextRequest) {

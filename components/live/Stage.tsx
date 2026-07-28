@@ -2,31 +2,22 @@
 
 import { useTracks, ParticipantTile } from "@livekit/components-react";
 import { Track } from "livekit-client";
-import type { TrackReferenceOrPlaceholder } from "@livekit/components-react";
-
-const MAX_SEATS = 8;
-
-function keyFor(t: TrackReferenceOrPlaceholder, i: number): string {
-  const sid = t.publication?.trackSid ?? "placeholder";
-  return `${t.participant.identity}_${t.source}_${sid}_${i}`;
-}
 
 export default function Stage() {
   const tracks = useTracks(
     [
       { source: Track.Source.ScreenShare, withPlaceholder: false },
-      { source: Track.Source.Camera, withPlaceholder: true },
+      { source: Track.Source.Camera, withPlaceholder: false },
     ],
     { onlySubscribed: false }
   );
 
-  const screen = tracks.filter((t) => t.source === Track.Source.ScreenShare);
-  const cams = tracks.filter((t) => t.source === Track.Source.Camera);
-
-  // A shared screen takes the main stage; otherwise the first camera does.
-  const featured = screen[0] ?? cams[0];
-  const seatTracks = (screen[0] ? cams : cams.slice(1)).slice(0, MAX_SEATS);
-  const emptySeats = Math.max(0, MAX_SEATS - seatTracks.length - (screen[0] ? 0 : 1));
+  // Only the host publishes, so we simply show their stream: screen share takes
+  // the stage, with the camera as a small picture-in-picture if both are on.
+  const screen = tracks.find((t) => t.source === Track.Source.ScreenShare);
+  const camera = tracks.find((t) => t.source === Track.Source.Camera);
+  const featured = screen ?? camera;
+  const pip = screen && camera ? camera : null;
 
   return (
     <div className="lgr-stage">
@@ -38,25 +29,14 @@ export default function Stage() {
             <span className="share-label">Waiting for the host to go live</span>
           </div>
         )}
-        {screen[0] && (
-          <span className="lgr-share-flag">
-            {screen[0].participant.name || screen[0].participant.identity} is
-            sharing a screen
-          </span>
-        )}
-      </div>
 
-      <div className="lgr-seats" aria-label="Stage seats">
-        {seatTracks.map((t, i) => (
-          <div className="lgr-seat" key={keyFor(t, i)}>
-            <ParticipantTile trackRef={t} />
+        {screen && <span className="lgr-share-flag">sharing screen</span>}
+
+        {pip && (
+          <div className="lgr-pip">
+            <ParticipantTile trackRef={pip} />
           </div>
-        ))}
-        {Array.from({ length: emptySeats }).map((_, i) => (
-          <div className="lgr-seat lgr-seat-empty" key={`empty_${i}`}>
-            <span>seat {seatTracks.length + i + 1 + (screen[0] ? 0 : 1)}</span>
-          </div>
-        ))}
+        )}
       </div>
     </div>
   );

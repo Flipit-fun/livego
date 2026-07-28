@@ -227,20 +227,11 @@ export default function Console() {
         <div className="stage-strip">
           <div className="speaker host talking">
             <span className="face" />
-            host
+            dev
           </div>
-          <div className="speaker">
-            <span className="face" />
-            0x91a
-          </div>
-          <div className="speaker">
-            <span className="face" />
-            0x7db
-          </div>
-          <div className="speaker">
-            <span className="face" />
-            0xc40
-          </div>
+          <span className="listening-pill mono">
+            {viewers.toLocaleString()} listening
+          </span>
           <div className="wave" ref={waveRef} />
         </div>
       </div>
