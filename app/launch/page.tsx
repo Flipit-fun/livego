@@ -45,6 +45,16 @@ export default function LaunchPage() {
 
     setLaunching(true);
     try {
+      // Ensure we're on RobinHood Chain before sending the tx
+      const { ensureChain, getChainId } = await import("@/lib/eip1193");
+      await ensureChain();
+      const chainId = await getChainId();
+      if (chainId !== 4663) {
+        toast("Please switch to RobinHood Chain (chain ID 4663) in your wallet");
+        setLaunching(false);
+        return;
+      }
+
       const initialBuyWei = initialBuy ? parseEther(initialBuy) : 0n;
       const value = parseEther(LAUNCH_FEE) + initialBuyWei;
 
@@ -65,6 +75,9 @@ export default function LaunchPage() {
         ],
       });
 
+      // Format value as proper hex (with 0x prefix, no leading zeros issue)
+      const hexValue = "0x" + value.toString(16);
+
       const txHash = (await provider.request({
         method: "eth_sendTransaction",
         params: [
@@ -72,10 +85,16 @@ export default function LaunchPage() {
             from: address,
             to: PONS_FACTORY,
             data,
-            value: "0x" + value.toString(16),
+            value: hexValue,
           },
         ],
       })) as string;
+
+      if (!txHash) {
+        toast("No transaction hash returned - check your wallet");
+        setLaunching(false);
+        return;
+      }
 
       toast("Transaction submitted - waiting for confirmation...");
 
@@ -140,11 +159,14 @@ export default function LaunchPage() {
         router.push(`/room/${tokenAddress}?t=${encodeURIComponent(symbol.trim().toUpperCase())}`);
       }, 1500);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Launch failed";
-      if (msg.includes("rejected") || msg.includes("denied")) {
-        toast("Transaction rejected");
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error("Launch error:", err);
+      if (msg.includes("rejected") || msg.includes("denied") || msg.includes("User rejected")) {
+        toast("Transaction rejected by user");
+      } else if (msg.includes("insufficient")) {
+        toast("Insufficient ETH on RobinHood Chain");
       } else {
-        toast(msg);
+        toast("Launch failed: " + msg.slice(0, 100));
       }
     } finally {
       setLaunching(false);
