@@ -30,9 +30,9 @@ function formatBalance(raw: string, decimals: number): string {
 }
 
 function formatUsd(raw: string, decimals: number, rate: string | null): string {
-  if (!rate) return "—";
+  if (!rate) return "-";
   const n = Number(formatUnits(BigInt(raw), decimals)) * Number(rate);
-  if (!Number.isFinite(n)) return "—";
+  if (!Number.isFinite(n)) return "-";
   return "$" + n.toLocaleString(undefined, { maximumFractionDigits: 0 });
 }
 
@@ -100,7 +100,7 @@ const inflight = new Map<string, Promise<string | null>>();
 
 /**
  * Resolve a token's dev. `creator_address_hash` is the deployer, but for
- * launchpad tokens that's the factory contract (e.g. a LaunchFactory) — not a
+ * launchpad tokens that's the factory contract (e.g. a LaunchFactory) - not a
  * person. The reliable human signal is the EOA that sent the creation
  * transaction (the account that called the factory / did the deploy), which is
  * correct for both direct deploys and launchpad deploys. Fall back to
@@ -144,7 +144,7 @@ async function creationTxFrom(txHash: string): Promise<string | null> {
   }
 }
 
-/** The deployer of a token contract — treated as the coin's dev. Cached. */
+/** The deployer of a token contract - treated as the coin's dev. Cached. */
 export async function getCreator(contract: string): Promise<string | null> {
   const key = contract.toLowerCase();
   if (creatorCache.has(key)) return creatorCache.get(key) ?? null;

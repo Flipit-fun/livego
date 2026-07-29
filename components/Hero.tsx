@@ -8,13 +8,13 @@ export default function Hero() {
 
   return (
     <header className="hero">
-      <div className="eyebrow">Built on RobinHood Chain</div>
+      <div className="eyebrow">CA - TBA</div>
       <h1>
         Live streaming for <span className="lit">tokenized assets</span>.
       </h1>
       <p className="lede">
         Connect your wallet and every token you hold becomes a room you can watch
-        from. When the token&apos;s dev goes live, you&apos;re already inside —
+        from. When the token&apos;s dev goes live, you&apos;re already inside -
         the chart, the voice, and the chat, all in one tab.
       </p>
       <div className="hero-cta">

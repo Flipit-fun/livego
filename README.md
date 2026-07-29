@@ -37,7 +37,7 @@ LIVEKIT_ALLOW_DEMO=true               # set false in prod to require a wallet
 # Wallet auth
 AUTH_SECRET=change-me-to-a-long-random-string
 
-# RobinHood Chain (optional — unset = demo mode with mock holdings)
+# RobinHood Chain (optional - unset = demo mode with mock holdings)
 NEXT_PUBLIC_CHAIN_ID=
 NEXT_PUBLIC_CHAIN_NAME=RobinHood Chain
 NEXT_PUBLIC_CHAIN_RPC_URL=
@@ -51,28 +51,28 @@ LiveKit server via `livekit-server --dev` and use `devkey` / `devsecret`.
 
 ## Scripts
 
-- `npm run dev` — start the dev server
-- `npm run build` — production build
-- `npm run start` — serve the production build
-- `npm run lint` — run Next.js lint
+- `npm run dev` - start the dev server
+- `npm run build` - production build
+- `npm run start` - serve the production build
+- `npm run lint` - run Next.js lint
 
 ## How it works
 
 The wallet stands in for the login, the guest list, and the subscriber base:
 
-1. **Connect & prove ownership** — `WalletContext.connect()` requests the account
+1. **Connect & prove ownership** - `WalletContext.connect()` requests the account
    from an injected EIP-1193 wallet, prompts a switch to RobinHood Chain, then has
    the user sign a server-issued challenge (a Sign-In-with-Ethereum style message).
    The signed proof is cached (24h) and the address becomes the LiveKit identity.
    With no injected wallet, it falls back to a stable demo identity.
-2. **Read holdings (any coin)** — `GET /api/wallet/coins` reads every ERC-20 the
+2. **Read holdings (any coin)** - `GET /api/wallet/coins` reads every ERC-20 the
    wallet holds directly from RobinHood Chain's Blockscout explorer
-   (`/api/v2/addresses/{wallet}/token-balances`) — no hardcoded token list. Each
+   (`/api/v2/addresses/{wallet}/token-balances`) - no hardcoded token list. Each
    coin's dev is the contract's deployer (`creator_address_hash`), cached
    process-wide. Rooms are keyed by contract address (unique), not ticker.
-3. **Pick a coin** — the dev of a coin sees `Go live`; holders see `Join` only
+3. **Pick a coin** - the dev of a coin sees `Go live`; holders see `Join` only
    when the dev is live, else `Not live`. Routes are `/room/{contract}?t=SYMBOL`.
-4. **Broadcast** — the room connects to LiveKit. The host publishes camera/mic on
+4. **Broadcast** - the room connects to LiveKit. The host publishes camera/mic on
    entry; anyone with publish rights can toggle mic, camera, or screen share and
    take one of the eight stage seats. Chat rides LiveKit's data channel.
 
@@ -80,7 +80,7 @@ The wallet stands in for the login, the guest list, and the subscriber base:
 
 1. Client requests the account and calls `POST /api/auth/challenge` with the
    address. The server returns a human-readable message embedding a nonce, an
-   expiry, and an HMAC — stateless and self-verifying, no session store.
+   expiry, and an HMAC - stateless and self-verifying, no session store.
 2. The wallet signs the message with `personal_sign`.
 3. `POST /api/livekit/token` receives `{ address, message, signature }`, re-checks
    the HMAC/expiry, then uses viem's `recoverMessageAddress` to confirm the
@@ -142,7 +142,7 @@ handles the explorer calls; `lib/chain.ts` `TOKEN_REGISTRY` and the demo coins i
 `lib/data.ts` are only used as a fallback when the explorer is unreachable.
 
 Publish rights are least-privilege: the token server grants `canPublish` only to a
-coin's dev — the address that **deployed the contract** (`creator_address_hash`).
+coin's dev - the address that **deployed the contract** (`creator_address_hash`).
 Everyone else joins subscribe-only. A room reports "live" when its dev is actively
 publishing, checked via LiveKit's room/participant listing in `lib/livekitServer.ts`.
 
@@ -151,7 +151,7 @@ address* to a dev address, e.g.
 `DEV_OVERRIDES=0xcontract…:0xyourwallet`. That wallet then gets host rights for
 that coin, so you can exercise the Go live / Join flows end to end.
 
-USD pricing comes from the explorer's exchange rate when available (else `—`). No
+USD pricing comes from the explorer's exchange rate when available (else `-`). No
 injected wallet + `NEXT_PUBLIC_ALLOW_DEMO=false` blocks connecting entirely.
 
 ## General notes

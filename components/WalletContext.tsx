@@ -86,7 +86,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // Restore a previous session (no re-signing — the challenge is valid for 24h).
+  // Restore a previous session (no re-signing - the challenge is valid for 24h).
   useEffect(() => {
     const storedAddr = window.localStorage.getItem(ADDR_KEY);
     if (!storedAddr) return;
@@ -128,7 +128,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         const signature = await personalSign(addr, data.message);
         proof = { address: addr, message: data.message, signature, demo: false };
       } else if (ALLOW_DEMO) {
-        // No injected wallet — fall back to a stable demo identity so the app
+        // No injected wallet - fall back to a stable demo identity so the app
         // is still usable. The server allows demo identities unless
         // LIVEKIT_ALLOW_DEMO=false.
         const existing = window.localStorage.getItem(ADDR_KEY);

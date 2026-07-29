@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
   try {
     holdings = await getHoldings(address);
   } catch {
-    // Explorer unavailable — return no coins rather than mock data.
+    // Explorer unavailable - return no coins rather than mock data.
     return NextResponse.json({ coins: [] });
   }
 

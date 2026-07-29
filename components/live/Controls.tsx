@@ -86,7 +86,7 @@ export default function Controls({ ticker }: { ticker: string }) {
       ) : (
         <span className="lgr-viewer-note">
           <i className="lgr-listen-dot" />
-          Listening to ${ticker} — only the dev can broadcast.
+          Listening to ${ticker} - only the dev can broadcast.
         </span>
       )}
 

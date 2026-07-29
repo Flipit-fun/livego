@@ -2,7 +2,7 @@ import { createHmac, randomBytes, timingSafeEqual } from "crypto";
 
 // Stateless sign-in challenge. The server issues a human-readable message that
 // embeds the address, a nonce, and an expiry, plus an HMAC so the server can
-// later confirm it issued that exact message — no session store required.
+// later confirm it issued that exact message - no session store required.
 
 const CHALLENGE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 

@@ -91,7 +91,7 @@ export async function ensureChain(): Promise<void> {
       try {
         await addChain(provider);
       } catch {
-        // user declined adding the network — stay on the current chain
+        // user declined adding the network - stay on the current chain
       }
     }
     // 4001 = user rejected the switch; anything else we also tolerate and

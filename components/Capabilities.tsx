@@ -15,14 +15,14 @@ export default function Capabilities() {
           <h3>Share what you&apos;re looking at</h3>
           <p>
             Put the chart, the contract, or the whole desktop on the stage at
-            full resolution — not a compressed thumbnail.
+            full resolution - not a compressed thumbnail.
           </p>
         </div>
         <div className="glass cap rv">
           <span className="k">Listen-only · Open chat</span>
           <h3>The room just listens</h3>
           <p>
-            Only the dev broadcasts — no seat requests, no cross-talk. Holders
+            Only the dev broadcasts - no seat requests, no cross-talk. Holders
             join to watch and hear, and the chat stays open to everyone.
           </p>
         </div>

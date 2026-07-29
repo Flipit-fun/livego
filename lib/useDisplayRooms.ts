@@ -20,7 +20,7 @@ export function coinToRoom(c: Coin, mine = true): RoomCard {
     t: c.t,
     n: c.n,
     title: c.title || `${c.t} room`,
-    host: c.dev ? shortenAddress(c.dev) : "—",
+    host: c.dev ? shortenAddress(c.dev) : "-",
     v: c.v,
     live: c.live,
     mine,
@@ -34,7 +34,7 @@ export interface DisplayRooms {
   stats: { live: number; watching: number; tokens: number };
 }
 
-/** Real holdings only — no mock or directory data. */
+/** Real holdings only - no mock or directory data. */
 export function useDisplayRooms(): DisplayRooms {
   const { coins } = useWallet();
   const held = coins.map((c) => coinToRoom(c));

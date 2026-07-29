@@ -1,4 +1,4 @@
-// Chain configuration for RobinHood Chain — an Arbitrum-Orbit EVM L2 that uses
+// Chain configuration for RobinHood Chain - an Arbitrum-Orbit EVM L2 that uses
 // ETH for gas (mainnet chain id 4663, testnet 46630). Defaults below are the
 // real public network values so the wallet can switch networks with no extra
 // setup; every field can still be overridden via env.

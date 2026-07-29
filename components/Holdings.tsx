@@ -47,7 +47,7 @@ export default function Holdings() {
         <h2>Hold the token, walk into the room.</h2>
         <p>
           No follow, no invite code, no application. Livego reads your balances,
-          and every token in the wallet opens a door — watch when the dev is
+          and every token in the wallet opens a door - watch when the dev is
           live, or open your own coin&apos;s room.
         </p>
       </div>
@@ -60,7 +60,7 @@ export default function Holdings() {
               <h3>Connect once</h3>
               <p>
                 Sign a message with your RobinHood Chain wallet. Nothing is
-                approved and nothing moves — Livego only reads balances.
+                approved and nothing moves - Livego only reads balances.
               </p>
             </div>
           </div>

@@ -46,7 +46,7 @@ export default function Rooms() {
           t: r.t,
           n: r.n,
           title: `${r.t} room`,
-          host: r.dev ? `${r.dev.slice(0, 6)}…${r.dev.slice(-4)}` : "—",
+          host: r.dev ? `${r.dev.slice(0, 6)}…${r.dev.slice(-4)}` : "-",
           v: r.v,
           live: r.live,
           mine: false,
@@ -93,7 +93,7 @@ export default function Rooms() {
         <div className="eyebrow">Join a room</div>
         <h2>Open any token&apos;s room by address.</h2>
         <p>
-          Paste a contract address to find its room and jump in — you can watch
+          Paste a contract address to find its room and jump in - you can watch
           any token, held or not. Only a coin&apos;s creator can go on air; every
           one else listens.
         </p>
@@ -146,7 +146,7 @@ export default function Rooms() {
         )
       ) : (
         <div className="no-hits">
-          Connect your wallet to see rooms for the tokens you hold — or paste a
+          Connect your wallet to see rooms for the tokens you hold - or paste a
           contract address above to join any room.
         </div>
       )}

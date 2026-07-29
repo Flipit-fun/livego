@@ -18,7 +18,7 @@ export default function RoomPage() {
 
   const { address, auth, status, connect } = useWallet();
 
-  // The wallet is the login — ensure we have a session before joining.
+  // The wallet is the login - ensure we have a session before joining.
   useEffect(() => {
     if (status === "disconnected") connect();
   }, [status, connect]);

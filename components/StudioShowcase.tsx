@@ -195,7 +195,7 @@ export default function StudioShowcase() {
     const v = input.trim();
     if (!v) return;
     if (!onAir) {
-      toast("The stream has ended — restart it to chat");
+      toast("The stream has ended - restart it to chat");
       return;
     }
     push("you", v, true);
@@ -212,7 +212,7 @@ export default function StudioShowcase() {
     } else {
       if (chatTimer.current) clearInterval(chatTimer.current);
       if (viewTimer.current) clearInterval(viewTimer.current);
-      toast("Stream ended — the room is closed");
+      toast("Stream ended - the room is closed");
     }
   };
 
@@ -224,7 +224,7 @@ export default function StudioShowcase() {
         <p>
           This is the live studio, not a picture of one. The dev toggles mic and
           camera, puts the chart on screen, and talks to the room. Holders just
-          listen and chat — no cross-talk, no seat requests.
+          listen and chat - no cross-talk, no seat requests.
         </p>
       </div>
 
@@ -244,7 +244,7 @@ export default function StudioShowcase() {
 
           <div className="stage">
             <span className="share-label">
-              {sharing ? `Sharing screen — ${ROOM.t} / USDG` : "Screen share off"}
+              {sharing ? `Sharing screen - ${ROOM.t} / USDG` : "Screen share off"}
             </span>
             <canvas
               id="chartCanvas"

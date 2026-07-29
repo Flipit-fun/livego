@@ -7,7 +7,7 @@ export interface Coin {
   usd: string;
   live: boolean;
   v: number;
-  /** Creator/dev address — the only account allowed to host this coin's room. */
+  /** Creator/dev address - the only account allowed to host this coin's room. */
   dev?: string;
   /** ERC-20 contract address; the unique room key for real (on-chain) coins. */
   address?: string;
@@ -56,7 +56,7 @@ export function devOverride(key: string): string | null {
  * Resolve the dev/creator address for a coin. Priority:
  *   1. DEV_OVERRIDES env
  *   2. on-chain token registry
- *   3. demo data — a "mine" coin is owned by the requesting wallet
+ *   3. demo data - a "mine" coin is owned by the requesting wallet
  * Returns a lowercased address or null.
  */
 export function devFor(ticker: string, requester?: string): string | null {

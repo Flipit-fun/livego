@@ -27,7 +27,7 @@ export async function deleteRoom(name: string): Promise<void> {
   try {
     await svc.deleteRoom(name);
   } catch {
-    // room may already be gone / empty — ignore
+    // room may already be gone / empty - ignore
   }
 }
 

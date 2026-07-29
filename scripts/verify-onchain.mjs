@@ -17,7 +17,7 @@ const msg = (
 ).message;
 const signature = await acct.signMessage({ message: msg });
 
-// USDG on RobinHood Chain — deployed by someone other than our test wallet.
+// USDG on RobinHood Chain - deployed by someone other than our test wallet.
 const contract = "0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168";
 
 const r = await fetch(BASE + "/api/livekit/token", {
@@ -31,4 +31,4 @@ console.log("wallet:            ", addr);
 console.log("room (contract):   ", contract);
 console.log("status:            ", r.status);
 console.log("token issued:      ", !!j.token);
-console.log("canPublish:        ", j.canPublish, "(expected false — not the deployer)");
+console.log("canPublish:        ", j.canPublish, "(expected false - not the deployer)");
