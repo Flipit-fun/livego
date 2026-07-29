@@ -1,25 +1,29 @@
 "use client";
 
 import { useWallet } from "./WalletContext";
+import { useToast } from "./Toast";
 
 interface ConnectButtonProps {
   className?: string;
-  /** When connected, show the shortened address instead of "Wallet connected". */
-  showAddress?: boolean;
   label?: string;
 }
 
 export default function ConnectButton({
   className = "btn",
-  showAddress = false,
   label = "Connect wallet",
 }: ConnectButtonProps) {
   const { status, connected, short, connect } = useWallet();
+  const toast = useToast();
 
   const handleClick = () => {
     if (status === "connecting") return;
+    if (connected) {
+      toast(`Wallet connected · ${short}`);
+      return;
+    }
     connect().then((addr) => {
       if (addr) {
+        toast("Wallet connected");
         document
           .getElementById("walletPanel")
           ?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -29,7 +33,7 @@ export default function ConnectButton({
 
   let text = label;
   if (status === "connecting") text = "Connecting…";
-  else if (connected) text = showAddress && short ? short : "Wallet connected";
+  else if (connected && short) text = short;
 
   return (
     <button

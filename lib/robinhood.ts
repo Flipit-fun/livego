@@ -63,6 +63,36 @@ export async function getHoldings(address: string): Promise<Coin[]> {
     .filter((c) => c.address);
 }
 
+export interface TokenInfo {
+  symbol: string;
+  name: string;
+  decimals: number;
+}
+
+/** Look up a token's metadata by contract address (for the CA search). */
+export async function getTokenInfo(contract: string): Promise<TokenInfo | null> {
+  try {
+    const res = await fetch(`${explorerBase()}/tokens/${contract}`, {
+      headers: { accept: "application/json" },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const d = (await res.json()) as {
+      symbol?: string | null;
+      name?: string | null;
+      decimals?: string | null;
+    };
+    if (!d.symbol && !d.name) return null;
+    return {
+      symbol: d.symbol || "TOKEN",
+      name: d.name || d.symbol || "Token",
+      decimals: Number(d.decimals ?? "18") || 18,
+    };
+  } catch {
+    return null;
+  }
+}
+
 // Contract creators never change, so cache them process-wide. Also dedupe
 // concurrent lookups for the same address.
 const creatorCache = new Map<string, string | null>();

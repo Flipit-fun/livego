@@ -8,7 +8,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-import { coins as demoCoins, type Coin } from "@/lib/data";
+import type { Coin } from "@/lib/data";
 import {
   hasInjectedWallet,
   requestAccounts,
@@ -78,9 +78,9 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         `/api/wallet/coins?address=${encodeURIComponent(addr)}`
       );
       const data = await res.json();
-      setCoins(Array.isArray(data.coins) ? data.coins : demoCoins);
+      setCoins(Array.isArray(data.coins) ? data.coins : []);
     } catch {
-      setCoins(demoCoins);
+      setCoins([]);
     } finally {
       setCoinsLoading(false);
     }

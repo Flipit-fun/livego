@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useParticipants } from "@livekit/components-react";
+import LogoMark from "@/components/LogoMark";
 
 export default function RoomHeader({ ticker }: { ticker: string }) {
   const participants = useParticipants();
@@ -9,7 +10,7 @@ export default function RoomHeader({ ticker }: { ticker: string }) {
   return (
     <header className="lgr-header glass">
       <Link href="/" className="brand" aria-label="Back to Livego">
-        <span className="tally" />
+        <LogoMark size={22} />
         Livego
       </Link>
 

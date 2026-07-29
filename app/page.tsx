@@ -1,19 +1,17 @@
-import Background from "@/components/Background";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Tape from "@/components/Tape";
-import Wallet from "@/components/Wallet";
-import Studio from "@/components/Studio";
+import Holdings from "@/components/Holdings";
+import StudioShowcase from "@/components/StudioShowcase";
+import Capabilities from "@/components/Capabilities";
 import Rooms from "@/components/Rooms";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 import RevealObserver from "@/components/RevealObserver";
-import { RoomProvider } from "@/components/RoomContext";
 
 export default function Home() {
   return (
-    <RoomProvider>
-      <Background />
+    <>
       <Nav />
 
       <div className="wrap">
@@ -23,14 +21,15 @@ export default function Home() {
       <Tape />
 
       <div className="wrap">
-        <Wallet />
-        <Studio />
+        <Holdings />
+        <StudioShowcase />
+        <Capabilities />
         <Rooms />
         <Cta />
         <Footer />
       </div>
 
       <RevealObserver />
-    </RoomProvider>
+    </>
   );
 }

@@ -1,17 +1,25 @@
+import LogoMark from "./LogoMark";
+
 export default function Footer() {
   return (
     <footer>
       <div className="foot">
         <div className="brand">
-          <span className="tally" />
+          <LogoMark size={22} />
           Livego
         </div>
-        <span>Broadcasting on RobinHood Chain</span>
+        <span>Streaming on RobinHood Chain</span>
         <div className="foot-links">
-          <a href="#wallet">Wallet</a>
+          <a href="#holdings">Holdings</a>
           <a href="#studio">Studio</a>
           <a href="#rooms">Live now</a>
-          <a href="#">Docs</a>
+          <a
+            href="https://x.com/TryLiveGo"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            X
+          </a>
         </div>
       </div>
     </footer>

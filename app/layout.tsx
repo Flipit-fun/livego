@@ -3,9 +3,20 @@ import "./globals.css";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  title: "Livego — your token is the channel",
+  title: "Livego — live streaming for tokenized assets",
   description:
-    "Connect your wallet and every coin you hold turns into a room you can broadcast from.",
+    "Connect your wallet and every token you hold becomes a room you can broadcast from on RobinHood Chain.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    title: "Livego — live streaming for tokenized assets",
+    description:
+      "Every token you hold becomes a room you can broadcast from on RobinHood Chain.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function RootLayout({
@@ -23,7 +34,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@10..48,75..100,200..800&family=Space+Mono:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Space+Mono:wght@400;700&display=swap"
           rel="stylesheet"
         />
       </head>

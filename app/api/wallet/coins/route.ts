@@ -1,24 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isAddress } from "viem";
-import { coins as demoCoins, devFor, devOverride, type Coin } from "@/lib/data";
+import { devOverride, type Coin } from "@/lib/data";
 import { getHoldings, getCreators } from "@/lib/robinhood";
 import { getLiveStatus } from "@/lib/livekitServer";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-/** Demo fallback (ticker-keyed) when the explorer can't be reached. */
-function demoFallback(address: string): Coin[] {
-  return demoCoins.map((c) => ({
-    t: c.t,
-    n: c.n,
-    b: c.b,
-    usd: c.usd,
-    live: false,
-    v: 0,
-    dev: devFor(c.t, address) ?? undefined,
-  }));
-}
 
 export async function GET(req: NextRequest) {
   const address = req.nextUrl.searchParams.get("address")?.trim();
@@ -33,8 +20,8 @@ export async function GET(req: NextRequest) {
   try {
     holdings = await getHoldings(address);
   } catch {
-    // Explorer unavailable — fall back to demo holdings.
-    return NextResponse.json({ coins: demoFallback(address) });
+    // Explorer unavailable — return no coins rather than mock data.
+    return NextResponse.json({ coins: [] });
   }
 
   // Real coins are keyed by contract address. Resolve each coin's dev (the

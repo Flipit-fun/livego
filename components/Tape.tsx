@@ -1,15 +1,24 @@
-import { tapeRooms } from "@/lib/data";
+"use client";
+
+import { useDisplayRooms } from "@/lib/useDisplayRooms";
 
 export default function Tape() {
-  const items = [...tapeRooms, ...tapeRooms];
+  const { held } = useDisplayRooms();
+  const live = held.filter((r) => r.live);
+  if (live.length === 0) return null;
+
+  const items = [...live, ...live];
+
   return (
     <div className="tape">
       <div className="tape-track">
         {items.map((r, i) => (
           <span className="tape-item" key={i}>
             <i />
-            <b>${r[0]}</b> {r[1]}{" "}
-            <span style={{ color: "var(--ink-45)" }}>{r[2]} watching</span>
+            <b>${r.t}</b> {r.title}{" "}
+            <span style={{ color: "var(--ink-45)" }}>
+              {r.v.toLocaleString()} watching
+            </span>
           </span>
         ))}
       </div>

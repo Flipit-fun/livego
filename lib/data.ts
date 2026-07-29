@@ -11,6 +11,8 @@ export interface Coin {
   dev?: string;
   /** ERC-20 contract address; the unique room key for real (on-chain) coins. */
   address?: string;
+  /** Optional room title for display in the directory. */
+  title?: string;
 }
 
 interface DemoCoin extends Coin {
@@ -20,13 +22,15 @@ interface DemoCoin extends Coin {
 }
 
 export const coins: DemoCoin[] = [
-  { t: "HOOD", n: "RobinHood", b: "128,400.22", usd: "$41,208", live: false, v: 0, mine: true },
-  { t: "USDG", n: "Gold Dollar", b: "12,050.00", usd: "$12,050", live: false, v: 0, dev: "0x1111111111111111111111111111111111111111" },
-  { t: "PERP", n: "Perp Index", b: "8,430.51", usd: "$6,102", live: false, v: 0, mine: true },
-  { t: "RWAX", n: "RWA Basket", b: "2,900.00", usd: "$9,860", live: false, v: 0, dev: "0x2222222222222222222222222222222222222222" },
-  { t: "STAKD", n: "Staked Hood", b: "640.77", usd: "$3,140", live: false, v: 0, dev: "0x3333333333333333333333333333333333333333" },
-  { t: "LEND", n: "Lendora", b: "55,210.00", usd: "$2,004", live: false, v: 0, dev: "0x4444444444444444444444444444444444444444" },
+  { t: "HOOD", n: "RobinHood", b: "128,400.22", usd: "$41,208", live: true, v: 1284, title: "Chain roadmap, unfiltered", mine: true },
+  { t: "USDG", n: "Gold Dollar", b: "12,050.00", usd: "$12,050", live: false, v: 0, title: "Reserve attestation Q&A", dev: "0x1111111111111111111111111111111111111111" },
+  { t: "PERP", n: "Perp Index", b: "8,430.51", usd: "$6,102", live: true, v: 412, title: "Funding rate teardown", mine: true },
+  { t: "RWAX", n: "RWA Basket", b: "2,900.00", usd: "$9,860", live: true, v: 337, title: "Basket rebalance call", dev: "0x2222222222222222222222222222222222222222" },
+  { t: "STAKD", n: "Staked Hood", b: "640.77", usd: "$3,140", live: false, v: 0, title: "Vault mechanics walkthrough", dev: "0x3333333333333333333333333333333333333333" },
+  { t: "LEND", n: "Lendora", b: "55,210.00", usd: "$2,004", live: true, v: 98, title: "Borrowing against RWAs", dev: "0x4444444444444444444444444444444444444444" },
 ];
+
+
 
 /** Optional server-side override mapping a coin -> dev address, from the
  * DEV_OVERRIDES env var. Keys may be a ticker OR a contract address, e.g.
@@ -70,24 +74,6 @@ export function devFor(ticker: string, requester?: string): string | null {
   return demo.dev ? demo.dev.toLowerCase() : null;
 }
 
-/** Static demo data for the marketing console, keyed by ticker. Unknown
- * tickers (e.g. a real holding) get lively synthesized values so the hero
- * preview never looks empty. */
-export function demoCoinFor(ticker: string): Coin {
-  const found = coins.find((c) => c.t === ticker);
-  if (found) return found;
-  let seed = 0;
-  for (const ch of ticker) seed += ch.charCodeAt(0);
-  return {
-    t: ticker,
-    n: ticker,
-    b: "0.00",
-    usd: "$0",
-    live: true,
-    v: 80 + (seed % 900),
-  };
-}
-
 export type ChatMessage = [who: string, text: string];
 
 export const chats: Record<string, ChatMessage[]> = {
@@ -129,25 +115,4 @@ export const chats: Record<string, ChatMessage[]> = {
   ],
 };
 
-export const tickers = ["HOOD", "USDG", "PERP", "RWAX", "LEND", "STAKD", "ROBIN", "QUILL", "SHEAF", "PASS", "GOLD", "HODL"];
-export const verbs = ["LIVE", "ROOM OPEN", "STAGE 3/8", "SCREEN SHARE", "MUTED", "JOINED", "ON AIR", "ENDED", "RECORDING"];
 
-export const tapeRooms: [string, string, string][] = [
-  ["HOOD", "chain roadmap, unfiltered", "1,284"],
-  ["PERP", "funding rate teardown", "412"],
-  ["LEND", "borrowing against RWAs", "98"],
-  ["RWAX", "basket rebalance call", "337"],
-  ["QUILL", "options desk, live fills", "76"],
-  ["SHEAF", "ETF launch walkthrough", "520"],
-  ["GOLD", "vault attestation Q&A", "204"],
-  ["ROBIN", "privacy pool office hours", "141"],
-];
-
-export const gridRooms: [string, string, string, string][] = [
-  ["HOOD", "Chain roadmap, unfiltered", "0x4f2c…9ce1", "1,284"],
-  ["PERP", "Funding rate teardown", "0x91a3…4d70", "412"],
-  ["SHEAF", "ETF launch walkthrough", "0x7db1…0c22", "520"],
-  ["RWAX", "Basket rebalance call", "0x2ba8…9155", "337"],
-  ["GOLD", "Vault attestation Q&A", "0xc40e…f2a9", "204"],
-  ["LEND", "Borrowing against RWAs", "0x5ff2…3a0b", "98"],
-];
