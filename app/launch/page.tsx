@@ -224,7 +224,7 @@ export default function LaunchPage() {
             <input className="lf-input" placeholder="https://..." value={website} onChange={(e) => setWebsite(e.target.value)} />
           </div>
           <div className="lf-row">
-            <label className="lf-label">Initial buy (ETH)</label>
+            <label className="lf-label">Initial buy (ETH on RobinHood Chain)</label>
             <input
               className="lf-input"
               placeholder="0 (optional - buy your own token on launch)"
@@ -237,7 +237,7 @@ export default function LaunchPage() {
           </div>
 
           <div className="lf-footer">
-            <span className="lf-fee mono">Launch fee: {LAUNCH_FEE} ETH</span>
+            <span className="lf-fee mono">Launch fee: {LAUNCH_FEE} ETH on RobinHood Chain</span>
             <button className="btn" onClick={doLaunch} disabled={launching}>
               {launching ? "Launching..." : connected ? "Launch token" : "Connect & launch"}
             </button>
