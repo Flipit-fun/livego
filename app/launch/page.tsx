@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { parseEther, encodeFunctionData } from "viem";
+import { parseEther, encodeFunctionData, toHex } from "viem";
 import { useWallet } from "@/components/WalletContext";
 import { useToast } from "@/components/Toast";
 import { getProvider } from "@/lib/eip1193";
-import { PONS_FACTORY, FACTORY_ABI, LAUNCH_FEE } from "@/lib/pons";
+import { PONS_FACTORY, FACTORY_ABI, LAUNCH_FEE, LAUNCH_CONFIG_ID, DEX_ID, TOKEN_LAUNCHED_TOPIC } from "@/lib/pons";
 import LogoMark from "@/components/LogoMark";
 import Link from "next/link";
 
@@ -56,22 +56,35 @@ export default function LaunchPage() {
       }
 
       const initialBuyWei = initialBuy ? parseEther(initialBuy) : 0n;
-      const value = parseEther(LAUNCH_FEE) + initialBuyWei;
+      const launchFeeWei = parseEther(LAUNCH_FEE);
+      const value = launchFeeWei + initialBuyWei;
+
+      // Generate a random salt for deterministic deployment
+      const saltBytes = new Uint8Array(32);
+      crypto.getRandomValues(saltBytes);
+      const salt = toHex(saltBytes);
 
       const data = encodeFunctionData({
         abi: FACTORY_ABI,
-        functionName: "launch",
+        functionName: "launchToken",
         args: [
-          name.trim(),
-          symbol.trim().toUpperCase(),
-          logo.trim(),
-          description.trim(),
-          twitter.trim(),
-          telegram.trim(),
-          discord.trim(),
-          website.trim(),
-          "", // farcaster
-          initialBuyWei,
+          {
+            name: name.trim(),
+            symbol: symbol.trim().toUpperCase(),
+            logo: logo.trim(),
+            description: description.trim(),
+            socials: {
+              twitter: twitter.trim(),
+              telegram: telegram.trim(),
+              discord: discord.trim(),
+              website: website.trim(),
+              farcaster: "",
+            },
+            feeWallet: address as `0x${string}`,
+          },
+          LAUNCH_CONFIG_ID,
+          DEX_ID,
+          salt as `0x${string}`,
         ],
       });
 
@@ -115,12 +128,11 @@ export default function LaunchPage() {
         return;
       }
 
-      // Find TokenLaunched event - topic0
-      const TOPIC0 = "0xdb51ea9ad51ab453a65a4cb7e60c3cb378c9501bb002609f8f97778fb6c4235a";
+      // Find TokenLaunched event
       const launchLog = receipt.logs.find(
         (l) =>
           l.address.toLowerCase() === PONS_FACTORY.toLowerCase() &&
-          l.topics[0]?.toLowerCase() === TOPIC0
+          l.topics[0]?.toLowerCase() === TOKEN_LAUNCHED_TOPIC
       );
 
       let tokenAddress: string | null = null;
