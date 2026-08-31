@@ -27,7 +27,6 @@ export default function Nav() {
         <a href="#holdings">Holdings</a>
         <a href="#studio">Studio</a>
         <a href="#rooms">Rooms</a>
-        <a href="/launch">Launch</a>
       </div>
       <div className="nav-right">
         <ThemeToggle />

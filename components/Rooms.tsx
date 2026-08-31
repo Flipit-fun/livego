@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { isAddress } from "viem";
 import { useWallet } from "./WalletContext";
 import { useToast } from "./Toast";
@@ -142,9 +141,6 @@ export default function Rooms() {
 
       {/* Launch + search bar */}
       <div className="rooms-bar rv">
-        <Link href="/launch" className="btn btn-sm">
-          Launch a token
-        </Link>
         <div className="search" style={{ margin: 0, flex: 1, minWidth: 230 }}>
           <span className="mono">CA</span>
           <input
@@ -213,10 +209,7 @@ export default function Rooms() {
       )}
       {!loadingLaunches && launches.length === 0 && (
         <div className="no-hits" style={{ marginBottom: 24 }}>
-          No tokens launched through StreamGo yet.{" "}
-          <Link href="/launch" style={{ color: "var(--amber)", textDecoration: "underline" }}>
-            Be the first.
-          </Link>
+          No tokens launched through StreamGo yet.
         </div>
       )}
       {loadingLaunches && (
