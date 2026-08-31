@@ -1,5 +1,5 @@
 -- Run this in the Supabase SQL editor (Dashboard > SQL Editor > New query).
--- This creates the `launches` table that tracks tokens launched via Livego.
+-- This creates the `launches` table that tracks tokens launched via StreamGo.
 
 CREATE TABLE IF NOT EXISTS launches (
   id BIGSERIAL PRIMARY KEY,

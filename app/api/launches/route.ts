@@ -5,7 +5,7 @@ import { getLiveStatus } from "@/lib/livekitServer";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// Returns all tokens launched through Livego, ordered newest first.
+// Returns all tokens launched through StreamGo, ordered newest first.
 export async function GET() {
   const { data, error } = await supabase
     .from("launches")

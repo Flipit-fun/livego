@@ -30,7 +30,7 @@ export default function Rooms() {
   const [launches, setLaunches] = useState<LaunchEntry[]>([]);
   const [loadingLaunches, setLoadingLaunches] = useState(true);
 
-  // Fetch Livego-launched tokens
+  // Fetch StreamGo-launched tokens
   useEffect(() => {
     fetch("/api/launches")
       .then((r) => r.json())
@@ -133,9 +133,9 @@ export default function Rooms() {
     <section className="sec" id="rooms">
       <div className="sec-head rv">
         <div className="eyebrow">Rooms</div>
-        <h2>Tokens launched on Livego.</h2>
+        <h2>Tokens launched on StreamGo.</h2>
         <p>
-          Every token launched through Livego appears here. Paste any contract
+          Every token launched through StreamGo appears here. Paste any contract
           address to join a room, or launch your own.
         </p>
       </div>
@@ -172,11 +172,11 @@ export default function Rooms() {
         </div>
       )}
 
-      {/* Livego-launched tokens */}
+      {/* StreamGo-launched tokens */}
       {launches.length > 0 && (
         <>
           <div className="side-h" style={{ padding: "0 2px 12px" }}>
-            Launched on Livego
+            Launched on StreamGo
           </div>
           <div className="rooms">
             {launches.map((l) => (
@@ -213,7 +213,7 @@ export default function Rooms() {
       )}
       {!loadingLaunches && launches.length === 0 && (
         <div className="no-hits" style={{ marginBottom: 24 }}>
-          No tokens launched through Livego yet.{" "}
+          No tokens launched through StreamGo yet.{" "}
           <Link href="/launch" style={{ color: "var(--amber)", textDecoration: "underline" }}>
             Be the first.
           </Link>

@@ -1,7 +1,7 @@
-# Livego
+# StreamGo
 
-Livego is a live streaming platform where **the token itself is the channel**. A
-user connects their RobinHood Chain wallet, Livego reads their balances, and every
+StreamGo is a live streaming platform where **the token itself is the channel**. A
+user connects their RobinHood Chain wallet, StreamGo reads their balances, and every
 coin they hold becomes a room they can either join (if someone is broadcasting) or
 open themselves. Going live is one press: the host can talk, turn on the camera,
 share their screen to put a chart or contract in front of the room, and pull holders
@@ -136,7 +136,7 @@ standard injected EIP-1193 flow (`window.ethereum`): request accounts, switch/ad
 the network, and `personal_sign` a challenge. Ownership is verified server-side, so
 a client can't obtain a LiveKit token for an address it doesn't control.
 
-Holdings and coin devs are read live from the chain (Blockscout), so Livego works
+Holdings and coin devs are read live from the chain (Blockscout), so StreamGo works
 for **any** coin on RobinHood Chain with no per-token configuration. `lib/robinhood.ts`
 handles the explorer calls; `lib/chain.ts` `TOKEN_REGISTRY` and the demo coins in
 `lib/data.ts` are only used as a fallback when the explorer is unreachable.

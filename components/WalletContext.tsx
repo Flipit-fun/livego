@@ -46,8 +46,8 @@ interface WalletContextValue {
 
 const WalletContext = createContext<WalletContextValue | null>(null);
 
-const ADDR_KEY = "livego.wallet.address";
-const PROOF_KEY = "livego.wallet.proof";
+const ADDR_KEY = "streamgo.wallet.address";
+const PROOF_KEY = "streamgo.wallet.proof";
 
 function randomAddress(): string {
   const hex = "0123456789abcdef";

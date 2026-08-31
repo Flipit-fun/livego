@@ -2,7 +2,7 @@ import { formatUnits } from "viem";
 import type { Coin } from "./data";
 
 // On-chain data for RobinHood Chain via its Blockscout explorer API. This is
-// what makes Livego work for ANY coin on the chain: holdings and the coin's
+// what makes StreamGo work for ANY coin on the chain: holdings and the coin's
 // dev (contract deployer) are read live, with no hardcoded token list.
 
 function explorerBase(): string {

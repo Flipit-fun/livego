@@ -28,5 +28,5 @@ for (const c of targets) {
   console.log(`\n${c}`);
   console.log("  name:            ", info.name);
   console.log("  creator (on-chn):", info.creator, "(may be a factory)");
-  console.log("  resolved dev:    ", info.dev, "(EOA launcher - what Livego uses)");
+  console.log("  resolved dev:    ", info.dev, "(EOA launcher - what StreamGo uses)");
 }

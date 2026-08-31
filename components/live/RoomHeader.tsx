@@ -9,9 +9,9 @@ export default function RoomHeader({ ticker }: { ticker: string }) {
 
   return (
     <header className="lgr-header glass">
-      <Link href="/" className="brand" aria-label="Back to Livego">
+      <Link href="/" className="brand" aria-label="Back to StreamGo">
         <LogoMark size={22} />
-        Livego
+        StreamGo
       </Link>
 
       <span className="onair">

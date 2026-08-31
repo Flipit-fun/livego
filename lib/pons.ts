@@ -1,6 +1,6 @@
-// Pons LaunchFactory integration for Livego.
+// Pons LaunchFactory integration for StreamGo.
 // Users launch tokens through our UI, which calls the factory directly.
-// We record the resulting token address in Supabase so only Livego-launched
+// We record the resulting token address in Supabase so only StreamGo-launched
 // tokens appear in our directory.
 
 export const PONS_FACTORY = "0xA5aAb3F0c6EeadF30Ef1D3Eb997108E976351feB" as const;

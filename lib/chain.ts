@@ -70,7 +70,7 @@ export interface TokenMeta {
   dev?: string;
 }
 
-// The set of tokens Livego knows how to surface as rooms. Populate with real
+// The set of tokens StreamGo knows how to surface as rooms. Populate with real
 // RobinHood Chain contract addresses to enable on-chain balance reading. When
 // empty the app falls back to demo holdings.
 export const TOKEN_REGISTRY: TokenMeta[] = [];

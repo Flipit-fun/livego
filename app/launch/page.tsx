@@ -189,15 +189,15 @@ export default function LaunchPage() {
     <div className="wrap" style={{ paddingTop: 100, paddingBottom: 80, minHeight: "100dvh" }}>
       <Link href="/" className="brand" style={{ marginBottom: 40, display: "inline-flex" }}>
         <LogoMark />
-        Livego
+        StreamGo
       </Link>
 
       <div className="sec-head">
-        <div className="eyebrow">Launch on pons via Livego</div>
+        <div className="eyebrow">Launch on pons via StreamGo</div>
         <h2>Create a token and go live.</h2>
         <p>
           Deploy a fixed-supply token on RobinHood Chain through the pons factory.
-          Your token will appear in Livego and you can start streaming to holders
+          Your token will appear in StreamGo and you can start streaming to holders
           immediately.
         </p>
       </div>

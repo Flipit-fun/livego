@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // Called by the client after a successful pons factory launch tx.
-// Records the token in our registry so it appears in Livego.
+// Records the token in our registry so it appears in StreamGo.
 export async function POST(req: NextRequest) {
   let body: {
     token?: string;

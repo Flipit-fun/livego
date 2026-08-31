@@ -3,7 +3,7 @@ import "./globals.css";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  title: "Livego - live streaming for tokenized assets",
+  title: "StreamGo - live streaming for tokenized assets",
   description:
     "Connect your wallet and every token you hold becomes a room you can broadcast from on RobinHood Chain.",
   icons: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   openGraph: {
-    title: "Livego - live streaming for tokenized assets",
+    title: "StreamGo - live streaming for tokenized assets",
     description:
       "Every token you hold becomes a room you can broadcast from on RobinHood Chain.",
     images: ["/logo.png"],
@@ -29,7 +29,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('livego.theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('streamgo.theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();`,
           }}
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

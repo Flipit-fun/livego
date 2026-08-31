@@ -57,7 +57,7 @@ NEXT_PUBLIC_LIVEKIT_URL=wss://your-project.livekit.cloud`}
           </pre>
         )}
         <Link className="btn btn-ghost" href="/">
-          Back to Livego
+          Back to StreamGo
         </Link>
       </RoomStatus>
     );

@@ -18,7 +18,7 @@ export default function ThemeToggle() {
     const next: Theme = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
     try {
-      localStorage.setItem("livego.theme", next);
+      localStorage.setItem("streamgo.theme", next);
     } catch {
       /* ignore */
     }

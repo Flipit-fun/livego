@@ -7,7 +7,7 @@ import { createHmac, randomBytes, timingSafeEqual } from "crypto";
 const CHALLENGE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 
 function secret(): string {
-  return process.env.AUTH_SECRET || "livego-dev-secret-change-me";
+  return process.env.AUTH_SECRET || "streamgo-dev-secret-change-me";
 }
 
 function sign(payload: string): string {
@@ -29,7 +29,7 @@ export function createChallenge(address: string): Challenge {
   const mac = sign(payload);
 
   const message = [
-    "Livego wants you to sign in with your RobinHood Chain wallet.",
+    "StreamGo wants you to sign in with your RobinHood Chain wallet.",
     "",
     `Address: ${addr}`,
     `Nonce: ${nonce}`,
