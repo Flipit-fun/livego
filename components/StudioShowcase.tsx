@@ -95,8 +95,8 @@ export default function StudioShowcase() {
     ctx.lineTo(W, H);
     ctx.closePath();
     const g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "rgba(232,164,5,.32)");
-    g.addColorStop(1, "rgba(232,164,5,0)");
+    g.addColorStop(0, "rgba(14,165,233,.32)");
+    g.addColorStop(1, "rgba(14,165,233,0)");
     ctx.fillStyle = g;
     ctx.fill();
     ctx.beginPath();
@@ -105,7 +105,7 @@ export default function StudioShowcase() {
       const y = H - (p / 100) * H * 0.66 - H * 0.14;
       i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
     });
-    ctx.strokeStyle = "#E8A400";
+    ctx.strokeStyle = "#0EA5E9";
     ctx.lineWidth = 2.2;
     ctx.lineJoin = "round";
     ctx.stroke();
@@ -113,11 +113,11 @@ export default function StudioShowcase() {
     const ly = H - (pts[pts.length - 1] / 100) * H * 0.66 - H * 0.14;
     ctx.beginPath();
     ctx.arc(lx, ly, 4.5, 0, 7);
-    ctx.fillStyle = "#E8A400";
+    ctx.fillStyle = "#0EA5E9";
     ctx.fill();
     ctx.beginPath();
     ctx.arc(lx, ly, 9, 0, 7);
-    ctx.strokeStyle = "rgba(232,164,5,.35)";
+    ctx.strokeStyle = "rgba(14,165,233,.35)";
     ctx.lineWidth = 2;
     ctx.stroke();
   };
