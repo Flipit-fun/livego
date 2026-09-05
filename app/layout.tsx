@@ -3,7 +3,7 @@ import "./globals.css";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  title: "StreamGo - live streaming for tokenized assets",
+  title: "LiveGo - live streaming for tokenized assets",
   description:
     "Connect your wallet and every token you hold becomes a room you can broadcast from on RobinHood Chain.",
   icons: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   openGraph: {
-    title: "StreamGo - live streaming for tokenized assets",
+    title: "LiveGo - live streaming for tokenized assets",
     description:
       "Every token you hold becomes a room you can broadcast from on RobinHood Chain.",
     images: ["/logo.png"],
