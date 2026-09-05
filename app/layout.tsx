@@ -32,6 +32,7 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem('streamgo.theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();`,
           }}
         />
+        <link rel="icon" href="/logo.png?v=2" type="image/png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
