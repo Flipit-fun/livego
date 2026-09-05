@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="foot">
         <div className="brand">
           <LogoMark size={22} />
-          StreamGo
+          LiveGo
         </div>
         <span>Streaming on RobinHood Chain</span>
         <div className="foot-links">
@@ -14,7 +14,7 @@ export default function Footer() {
           <a href="#studio">Studio</a>
           <a href="#rooms">Live now</a>
           <a
-            href="https://x.com/TryStreamGo"
+            href="https://x.com/LiveGoOrg"
             target="_blank"
             rel="noopener noreferrer"
           >

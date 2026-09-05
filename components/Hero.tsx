@@ -8,9 +8,7 @@ export default function Hero() {
 
   return (
     <header className="hero">
-      <div className="eyebrow">
-        CA 0xe74f8cd4b5ecfd8d6f31a4644e0c9f9de893a909 - live on RobinHood Chain
-      </div>
+      <div className="eyebrow">CA - TBA</div>
       <h1>
         Live streaming for <span className="lit">tokenized assets</span>.
       </h1>
